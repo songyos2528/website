@@ -32,15 +32,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Deploy to Railway
+      - name: Deploy to Render
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-          SERVICE_ID: ${{ secrets.RAILWAY_SERVICE_ID }}
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
         run: |
-          if [ -z "$RAILWAY_TOKEN" ] || [ -z "$SERVICE_ID" ]; then
-            echo "⚠️  Railway credentials not configured. Skipping Railway deployment."
-            echo "Setup instructions: Configure RAILWAY_TOKEN and RAILWAY_SERVICE_ID in GitHub Secrets"
+          if [ -z "$RENDER_DEPLOY_HOOK" ]; then
+            echo "⚠️  Render deploy hook not configured. Cannot deploy to Render."
+            echo "Setup instructions:"
+            echo "1. Go to https://dashboard.render.com"
+            echo "2. Select your service 'website-api'"
+            echo "3. Go to Settings → Deploy Hooks"
+            echo "4. Copy the webhook URL"
+            echo "5. Go to GitHub Repo Settings → Secrets and variables → Actions"
+            echo "6. Add secret: RENDER_DEPLOY_HOOK = (paste the webhook URL)"
           else
-            npm install -g @railway/cli
-            railway up --service $SERVICE_ID
+            echo "Triggering Render deployment..."
+            curl -X POST "$RENDER_DEPLOY_HOOK"
+            echo "✅ Render deployment triggered!"
           fi
