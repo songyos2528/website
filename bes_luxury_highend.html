@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ทีมผู้รับเหมา — Premium Construction Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0d0d0d;
+            --white: #fafaf8;
+            --gray: #8a8a8a;
+            --light-gray: #f5f4f0;
+            --gold: #b8860b;
+            --cream: #fffaf0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--black);
+            background: var(--white);
+            line-height: 1.8;
+            letter-spacing: 0.4px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: -0.8px;
+            line-height: 1.25;
+        }
+
+        a {
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 4rem;
+            background: var(--white);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--black);
+        }
+
+        .logo-sub {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: -0.3rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            color: var(--black);
+            position: relative;
+            font-weight: 400;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.4s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            border: 1px solid var(--black);
+            padding: 0.8rem 2rem;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .nav-cta:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom, var(--white) 0%, var(--light-gray) 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(184, 134, 11, 0.04) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: drift 8s ease-in-out infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            margin-bottom: 1rem;
+            color: var(--black);
+            letter-spacing: -1.5px;
+            line-height: 1;
+            font-weight: 600;
+        }
+
+        .hero .divider {
+            width: 80px;
+            height: 1px;
+            background: var(--gold);
+            margin: 2rem auto;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            letter-spacing: 1px;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--black);
+            background: transparent;
+            color: var(--black);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn:hover {
+            background: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+        }
+
+        .btn.gold {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .btn.gold:hover {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
+
+        /* ========== PORTFOLIO SECTION ========== */
+        .portfolio-section {
+            padding: 8rem 4rem;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--black);
+            letter-spacing: -1px;
+        }
+
+        .section-header .divider {
+            width: 80px;
+            height: 1px;
+            background: var(--gold);
+            margin: 1.5rem auto 2rem;
+        }
+
+        .section-header p {
+            font-size: 1rem;
+            color: var(--gray);
+            letter-spacing: 0.5px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            position: relative;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            background: var(--light-gray);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.04);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(13,13,13,0.9), rgba(13,13,13,0.2));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem;
+            color: var(--white);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay h3 {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.5px;
+        }
+
+        .portfolio-overlay p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .portfolio-overlay .price {
+            color: var(--gold);
+            font-weight: 500;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about-section {
+            padding: 8rem 4rem;
+            background: var(--light-gray);
+        }
+
+        .about-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            color: var(--black);
+            letter-spacing: -1px;
+        }
+
+        .about-content p {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 1.8rem;
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        .about-highlight {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 3.5rem;
+            padding-top: 3.5rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            letter-spacing: 0.5px;
+            font-weight: 400;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, var(--white) 0%, var(--cream) 100%);
+            aspect-ratio: 3/4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+
+        /* ========== TEAM SECTION ========== */
+        .team-section {
+            padding: 8rem 4rem;
+            background: var(--white);
+        }
+
+        .team-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 3rem 2rem;
+            border: 1px solid rgba(0,0,0,0.08);
+            background: var(--white);
+            transition: all 0.4s ease;
+        }
+
+        .team-member:hover {
+            border-color: var(--gold);
+            background: var(--cream);
+            transform: translateY(-8px);
+        }
+
+        .team-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .team-member h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--black);
+        }
+
+        .team-member .role {
+            font-size: 0.85rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+        }
+
+        .team-member p {
+            font-size: 0.95rem;
+            color: var(--gray);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* ========== SERVICES SECTION ========== */
+        .services-section {
+            padding: 8rem 4rem;
+            background: var(--light-gray);
+        }
+
+        .services-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            padding: 3rem 2.5rem;
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transform: translateY(-6px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--gray);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* ========== CONTACT SECTION ========== */
+        .contact-section {
+            padding: 8rem 4rem;
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(184, 134, 11, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .contact-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .contact-section .divider {
+            background: var(--gold);
+            margin: 1.5rem auto 2rem;
+        }
+
+        .contact-section p {
+            font-size: 1.05rem;
+            margin-bottom: 3rem;
+            color: rgba(255,255,255,0.8);
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .contact-item {
+            padding: 1.5rem;
+        }
+
+        .contact-item strong {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .contact-item span {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.85);
+            font-weight: 300;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--black);
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+            padding: 3rem 2rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.4px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes drift {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(30px);
+            }
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .team-grid,
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1.5rem;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .team-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-section,
+            .about-section,
+            .team-section,
+            .services-section,
+            .contact-section {
+                padding: 4rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            ทีมผู้รับเหมา
+            <div class="logo-sub">Professional Construction</div>
+        </div>
+        <nav>
+            <a href="#portfolio">ผลงาน</a>
+            <a href="#about">เกี่ยวกับ</a>
+            <a href="#team">ทีม</a>
+            <a href="#services">บริการ</a>
+            <a href="#contact" class="nav-cta">ติดต่อ</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Exceptional Craftsmanship</h1>
+            <div class="divider"></div>
+            <p class="subtitle">ทีมผู้รับเหมา | ประสบการณ์ 30+ ปี</p>
+            <p class="description">
+                บริการงานก่อสร้าง ตกแต่งภายใน และซ่อมแซมระดับพรีเมียม<br/>
+                โดยใช้วัสดุคุณภาพเยี่ยมและเทคนิคมืออาชีพ
+            </p>
+            <div class="cta-group">
+                <button class="btn">ดูผลงาน</button>
+                <button class="btn gold">ขอใบเสนอราคา</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio-section" id="portfolio">
+        <div class="section-header">
+            <h2>Featured Projects</h2>
+            <div class="divider"></div>
+            <p>โครงการที่ได้รับการดำเนินการอย่างประณีตและสมบูรณ์</p>
+        </div>
+
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8e12a7c6?w=600&h=400&fit=crop" alt="Fence Renovation Before After">
+                <div class="portfolio-overlay">
+                    <h3>Fence Restoration</h3>
+                    <p>งานซ่อมรั้วลวดตาข่าย ปรับปรุงโครงสร้าง ยาว 45 เมตร</p>
+                    <div class="price">฿52,000</div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <img src="https://images.pexels.com/photos/3938040/pexels-photo-3938040.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Living Room Renovation">
+                <div class="portfolio-overlay">
+                    <h3>Living Room Renovation</h3>
+                    <p>ปรับปรุงห้องนั่งเล่น ตกแต่งพรีเมียม ด้วยวัสดุคุณภาพสูง</p>
+                    <div class="price">฿85,000</div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <img src="https://images.pexels.com/photos/4195325/pexels-photo-4195325.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Electrical System Installation">
+                <div class="portfolio-overlay">
+                    <h3>Complete Electrical System</h3>
+                    <p>ติดตั้งระบบไฟฟ้าครบวงจร ตามมาตรฐาน Safety Code</p>
+                    <div class="price">฿75,000</div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <img src="https://images.pexels.com/photos/3555849/pexels-photo-3555849.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Luxury Interior Design">
+                <div class="portfolio-overlay">
+                    <h3>Luxury Interior Design</h3>
+                    <p>ตกแต่งพรีเมียม ด้วยการออกแบบและวัสดุสูงส่วน</p>
+                    <div class="price">฿125,000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-content">
+                <h2>About Us</h2>
+                <p>
+                    เราคือทีมผู้รับเหมาที่มีประสบการณ์รวมกันนาน <span class="about-highlight">30 ปีขึ้นไป</span>
+                    ในงานก่อสร้าง ตกแต่งภายใน และซ่อมแซมระดับพรีเมียม
+                </p>
+                <p>
+                    ทีมของเราประกอบด้วยช่างผู้ชำนาญการในหลากหลายสาขา 
+                    ที่มีความเชี่ยวชาญในการใช้วัสดุคุณภาพเยี่ยมและเทคนิคมืออาชีพ
+                </p>
+                <p>
+                    เรามุ่งมั่นให้งานทุกชิ้นมีคุณภาพเหนือหาด ตรงเวลา และราคาเหมาะสม
+                    โดยใช้ประสบการณ์และความเชี่ยวชาญของทีมเพื่อให้ลูกค้าได้รับความพึงพอใจสูงสุด
+                </p>
+
+                <div class="about-stats">
+                    <div class="stat">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">โครงการเสร็จสิ้น</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">30+</div>
+                        <div class="stat-label">ปีประสบการณ์</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">ลูกค้าพึงพอใจ</div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">👨‍💼</div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="team">
+        <div class="section-header">
+            <h2>Expert Team</h2>
+            <div class="divider"></div>
+            <p>สมาชิกทีมผู้เชี่ยวชาญในหลากหลายสาขา</p>
+        </div>
+
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-icon">👨‍🔧</div>
+                <h3>Project Manager</h3>
+                <p class="role">หัวหน้าทีม</p>
+                <p>ประสบการณ์ 15+ ปี ในบริหารโครงการและควบคุมคุณภาพ</p>
+            </div>
+
+            <div class="team-member">
+                <div class="team-icon">🏗️</div>
+                <h3>Structural Expert</h3>
+                <p class="role">ผู้เชี่ยวชาญโครงสร้าง</p>
+                <p>ผู้เชี่ยวชาญด้านโครงสร้าง ตามมาตรฐาน Building Code</p>
+            </div>
+
+            <div class="team-member">
+                <div class="team-icon">🎨</div>
+                <h3>Interior Designer</h3>
+                <p class="role">ออกแบบภายใน</p>
+                <p>ผู้ออกแบบมืออาชีพ ความสง่างามและหรูหรา</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="section-header">
+            <h2>Our Services</h2>
+            <div class="divider"></div>
+            <p>บริการครบวงจรสำหรับงานก่อสร้างและตกแต่งภายใน</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🛠️</div>
+                <h3>General Repairs</h3>
+                <p>ซ่อมแซมผนัง พื้น ประตู หน้าต่าง ตามมาตรฐาน</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🏗️</div>
+                <h3>New Construction</h3>
+                <p>ปลูกสร้างใหม่ ห้องเพิ่มเติม โรงจักร ตกแต่งปรับปรุง</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>Interior Design</h3>
+                <p>ออกแบบและตกแต่งห้อง รสนิยมสูง วัสดุพรีเมียม</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3>Electrical Systems</h3>
+                <p>ติดตั้งระบบไฟฟ้า ตามมาตรฐาน Safety Code สากล</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💧</div>
+                <h3>Plumbing Systems</h3>
+                <p>ติดตั้งท่อน้ำ ระบบประปาครบวงจร วัสดุคุณภาพ</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📋</div>
+                <h3>Free Consultation</h3>
+                <p>สำรวจหน้างาน ให้คำแนะนำ เสนอราคาฟรี</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <h2>Let's Create Something Exceptional</h2>
+            <div class="divider"></div>
+            <p>พร้อมให้คำปรึกษา สำรวจหน้างาน และเสนอราคาฟรี</p>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <strong>📞 Phone</strong>
+                    <span>083-6143200</span>
+                </div>
+                <div class="contact-item">
+                    <strong>💬 Line</strong>
+                    <span>@songyos2528</span>
+                </div>
+                <div class="contact-item">
+                    <strong>📧 Email</strong>
+                    <span>songyos2528@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <strong>📍 Location</strong>
+                    <span>Bangkok, Thailand</span>
+                </div>
+            </div>
+
+            <button class="btn" style="border-color: var(--white); color: var(--white);">REQUEST A QUOTE</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 ทีมผู้รับเหมา — Premium Construction & Interior Design Services</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

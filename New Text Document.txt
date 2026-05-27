@@ -1,0 +1,7 @@
+# Terminal 1 - Backend
+cd D:\Website\api
+npm start
+
+# Terminal 2 - Frontend
+cd D:\Website\app
+npm run dev
