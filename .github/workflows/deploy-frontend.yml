@@ -8,6 +8,11 @@ on:
       - 'app/**'
       - '.github/workflows/deploy-frontend.yml'
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
