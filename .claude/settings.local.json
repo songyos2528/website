@@ -46,7 +46,20 @@
       "Bash(sed -i '122,480d' server.js)",
       "Bash(cd D:\\\\\\\\Website)",
       "Bash(gh run *)",
-      "Bash(cd \"/d/Website\" && rm -f app/src/trigger.txt REBUILD_LOG.txt)"
+      "Bash(cd \"/d/Website\" && rm -f app/src/trigger.txt REBUILD_LOG.txt)",
+      "Bash(start \"https://songyos2528.github.io/website/\")",
+      "Bash(powershell.exe -Command \"Start-Process 'https://songyos2528.github.io/website/'\")",
+      "Bash(curl -s \"https://website-api-lmf9.onrender.com/api/projects\")",
+      "Bash(curl -s \"https://website-api-lmf9.onrender.com/\")",
+      "Bash(curl -v \"https://website-api-lmf9.onrender.com/api/projects\")",
+      "Bash(curl -s -H \"Authorization: Bearer $\\(echo 'missing-token'\\)\" \"https://api.render.com/v1/services\")",
+      "Bash(curl -s http://localhost:3000/api/projects)",
+      "Bash(pkill -f \"npm start\")",
+      "Bash(curl -s \"https://songyos2528.github.io/website/\")",
+      "Bash(npm list *)",
+      "Bash(curl -s \"https://website-api-lmf9.onrender.com/api/business-info\")",
+      "Bash(curl -I \"https://website-api-lmf9.onrender.com/\")",
+      "Bash(curl -s \"https://api.render.com/v1/services\" -H \"Authorization: Bearer test\")"
     ]
   }
 }

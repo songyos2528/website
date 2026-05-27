@@ -32,21 +32,29 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Deploy to Render
+      - name: Deploy to Railway
         env:
-          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         run: |
-          if [ -z "$RENDER_DEPLOY_HOOK" ]; then
-            echo "⚠️  Render deploy hook not configured. Cannot deploy to Render."
-            echo "Setup instructions:"
-            echo "1. Go to https://dashboard.render.com"
-            echo "2. Select your service 'website-api'"
-            echo "3. Go to Settings → Deploy Hooks"
-            echo "4. Copy the webhook URL"
-            echo "5. Go to GitHub Repo Settings → Secrets and variables → Actions"
-            echo "6. Add secret: RENDER_DEPLOY_HOOK = (paste the webhook URL)"
+          if [ -z "$RAILWAY_TOKEN" ]; then
+            echo "ℹ️  Railway token not configured. Skipping automated Railway deployment."
+            echo ""
+            echo "To enable auto-deploy to Railway:"
+            echo "1. Go to https://railway.app"
+            echo "2. Login and create an account (if needed)"
+            echo "3. Create new project → Deploy from GitHub"
+            echo "4. Select: songyos2528/website repository"
+            echo "5. Configure root directory: api"
+            echo "6. Add environment variables:"
+            echo "   - NODE_ENV=production"
+            echo "   - PORT=3000"
+            echo "7. Go to https://railway.app/account/tokens"
+            echo "8. Create API token"
+            echo "9. Add to GitHub Secrets: RAILWAY_TOKEN"
+            echo ""
+            echo "Once configured, Railway will auto-deploy on every push to main branch."
           else
-            echo "Triggering Render deployment..."
-            curl -X POST "$RENDER_DEPLOY_HOOK"
-            echo "✅ Render deployment triggered!"
+            echo "✅ Railway token found. Deploying..."
+            npm install -g @railway/cli
+            railway up
           fi
