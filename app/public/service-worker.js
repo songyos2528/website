@@ -1,7 +1,7 @@
 // Service Worker for offline-first API caching
 // Serves local API data without requiring backend server
 
-const API_DATA_URL = '/website/api-data.json';
+const API_DATA_URL = '/api-data.json';
 const API_CACHE = 'api-data-v1';
 
 // API endpoint patterns this service worker handles
