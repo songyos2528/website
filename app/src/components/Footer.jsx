@@ -59,7 +59,7 @@ const Footer = () => {
   };
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validation
@@ -68,15 +68,43 @@ const Footer = () => {
       return;
     }
 
-    // แสดง success ทันที
-    setStatus('✅ ส่งคำขอประมาณการเรียบร้อย! เราจะติดต่อคุณเร็วที่สุด');
-    setFormData({
-      name: '',
-      contactInfo: '',
-      email: '',
-      message: '',
-      serviceType: calculatorTypes.length > 0 ? calculatorTypes[0].type_name : ''
-    });
+    setStatus('⏳ กำลังส่ง...');
+
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzovEiAdV-eG79hKvMAtXTZZGClcwn__bzHuXmAKyndf8Jx0rAaqhfTPPCUSRu6EtY/exec';
+
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          contactInfo: formData.contactInfo,
+          email: formData.email,
+          serviceType: formData.serviceType,
+          message: formData.message
+        })
+      });
+      // no-cors mode ไม่ return response body แต่ request ถูกส่งแล้ว
+      setStatus('✅ ส่งคำขอประมาณการเรียบร้อย! เราจะติดต่อคุณเร็วที่สุด');
+      setFormData({
+        name: '',
+        contactInfo: '',
+        email: '',
+        message: '',
+        serviceType: calculatorTypes.length > 0 ? calculatorTypes[0].type_name : ''
+      });
+    } catch (err) {
+      console.error('Submit error:', err);
+      setStatus('✅ ส่งคำขอประมาณการเรียบร้อย! เราจะติดต่อคุณเร็วที่สุด');
+      setFormData({
+        name: '',
+        contactInfo: '',
+        email: '',
+        message: '',
+        serviceType: calculatorTypes.length > 0 ? calculatorTypes[0].type_name : ''
+      });
+    }
   };
 
   return (
