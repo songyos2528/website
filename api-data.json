@@ -2,24 +2,164 @@
   "projects": [
     {
       "id": 1,
-      "title": "ตกแต่งห้องนอนสมัยใหม่",
-      "category": "interior",
-      "description": "ปรับปรุงห้องนอนให้ดูทันสมัย ด้วยวัสดุคุณภาพสูงและการออกแบบที่ลงตัว",
-      "img": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop&q=80"
+      "title": "โปรเจกต์ที่ 1",
+      "category": "renovation",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779782635231-992330890.jpg"
     },
     {
       "id": 2,
-      "title": "ต่อเติมห้องนั่งเล่น",
-      "category": "interior",
-      "description": "ต่อเติมพื้นที่ห้องนั่งเล่นเพิ่มขนาดให้กว้างขึ้น",
-      "img": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&w=600&h=400&fit=crop&q=80"
+      "title": "โปรเจกต์ที่ 2",
+      "category": "renovation",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779782757400-33283092.jpg"
     },
     {
       "id": 3,
-      "title": "รีโนเวทอพาร์ตเมนต์",
+      "title": "โปรเจกต์ที่ 3",
+      "category": "interior",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779783169737-756889846.png"
+    },
+    {
+      "id": 4,
+      "title": "โปรเจกต์ที่ 4",
+      "category": "interior",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779783319930-187142718.jpg"
+    },
+    {
+      "id": 5,
+      "title": "โปรเจกต์ที่ 5",
       "category": "renovation",
-      "description": "รีโนเวทห้องพักทั้งห้อง เปลี่ยนพื้น ผนัง เพดาน และระบบไฟ",
-      "img": "https://images.unsplash.com/photo-1493857671505-72967e2e2760?ixlib=rb-4.0.3&w=600&h=400&fit=crop&q=80"
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779785226968-412336259.jpg"
+    },
+    {
+      "id": 6,
+      "title": "โปรเจกต์ที่ 6",
+      "category": "renovation",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779785241621-337943339.jpg"
+    },
+    {
+      "id": 7,
+      "title": "โปรเจกต์ที่ 7",
+      "category": "interior",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779785547915-109165230.jpg"
+    },
+    {
+      "id": 8,
+      "title": "โปรเจกต์ที่ 8",
+      "category": "exterior",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779785970298-590721532.jpg"
+    },
+    {
+      "id": 9,
+      "title": "โปรเจกต์ที่ 9",
+      "category": "exterior",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779786080329-276904200.jpg"
+    },
+    {
+      "id": 10,
+      "title": "โปรเจกต์ที่ 10",
+      "category": "renovation",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779786145227-543979925.jpg"
+    },
+    {
+      "id": 11,
+      "title": "โปรเจกต์ที่ 11",
+      "category": "interior",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779786515038-373585054.jpg"
+    },
+    {
+      "id": 12,
+      "title": "โปรเจกต์ที่ 12",
+      "category": "interior",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779786596501-469985208.jpg"
+    },
+    {
+      "id": 13,
+      "title": "โปรเจกต์ที่ 13",
+      "category": "renovation",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779787803844-221673572.jpg"
+    },
+    {
+      "id": 14,
+      "title": "โปรเจกต์ที่ 14",
+      "category": "renovation",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779787813248-585760407.jpg"
+    },
+    {
+      "id": 15,
+      "title": "โปรเจกต์ที่ 15",
+      "category": "interior",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779787813754-565499692.jpg"
+    },
+    {
+      "id": 16,
+      "title": "โปรเจกต์ที่ 16",
+      "category": "exterior",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779787866260-163807175.jpg"
+    },
+    {
+      "id": 17,
+      "title": "โปรเจกต์ที่ 17",
+      "category": "renovation",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779790295742-502441433.jpg"
+    },
+    {
+      "id": 18,
+      "title": "โปรเจกต์ที่ 18",
+      "category": "interior",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779790410808-13652151.jpg"
+    },
+    {
+      "id": 19,
+      "title": "โปรเจกต์ที่ 19",
+      "category": "exterior",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779819316661-397281363.png"
+    },
+    {
+      "id": 20,
+      "title": "โปรเจกต์ที่ 20",
+      "category": "renovation",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779820647657-964979454.png"
+    },
+    {
+      "id": 21,
+      "title": "โปรเจกต์ที่ 21",
+      "category": "interior",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779821095254-83236253.png"
+    },
+    {
+      "id": 22,
+      "title": "โปรเจกต์ที่ 22",
+      "category": "interior",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779821105538-981100333.png"
+    },
+    {
+      "id": 23,
+      "title": "โปรเจกต์ที่ 23",
+      "category": "exterior",
+      "description": "ผลงานการรีโนเวทและตกแต่งคุณภาพสูง",
+      "img": "/website/uploads/1779821114162-539615797.png"
     }
   ],
   "calculatorTypes": [
