@@ -130,11 +130,14 @@ function routeApiRequest(pathname, data) {
   }
 
   if (pathname.includes('/api/business-info')) {
-    return {
-      name: 'Construction & Interior Design',
-      description: 'Professional construction and interior design services',
-      email: 'info@example.com',
-      phone: '+66-xxx-xxxx'
+    return data.businessInfo || {
+      name: 'BS Build',
+      company_name: 'BS Build',
+      description: 'บริการรับเหมาก่อสร้าง ต่อเติม และรีโนเวทบ้านแบบครบวงจร',
+      email: 'info@bsbuildth.com',
+      phone: '02-322-0000',
+      line_id: '@bsbuild',
+      address: 'กรุงเทพมหานคร'
     };
   }
 
