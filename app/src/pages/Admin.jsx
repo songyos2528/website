@@ -43,7 +43,8 @@ const Admin = ({ setIsAuthenticated }) => {
     address: '',
     phone: '',
     email: '',
-    line_id: ''
+    line_id: '',
+    messenger_url: ''
   });
   const [websiteContent, setWebsiteContent] = useState([]);
   const [contentKey, setContentKey] = useState('');
@@ -242,7 +243,8 @@ const Admin = ({ setIsAuthenticated }) => {
           address: data.address || '',
           phone: data.phone || '',
           email: data.email || '',
-          line_id: data.line_id || ''
+          line_id: data.line_id || '',
+          messenger_url: data.messenger_url || ''
         });
       })
       .catch(err => console.error(err));
@@ -648,9 +650,15 @@ const Admin = ({ setIsAuthenticated }) => {
           />
           <input
             type="text"
-            placeholder="LINE ID"
+            placeholder="LINE ID (เช่น @bsbuild — ปุ่ม LINE จะโผล่เมื่อมีค่า)"
             value={businessInfo.line_id}
             onChange={e => setBusinessInfo({ ...businessInfo, line_id: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Messenger URL (เช่น https://m.me/yourpage — ปุ่ม Messenger จะโผล่เมื่อมีค่า)"
+            value={businessInfo.messenger_url}
+            onChange={e => setBusinessInfo({ ...businessInfo, messenger_url: e.target.value })}
           />
           <button type="submit" className="btn btn-solid">Save Business Info</button>
         </form>

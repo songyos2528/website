@@ -3,7 +3,7 @@ import { getBusinessInfo } from '../firebase/api';
 import './LineButton.css';
 
 const LineButton = () => {
-  const [lineId, setLineId] = useState('@professional_const');
+  const [lineId, setLineId] = useState('');
   const [messengerUrl, setMessengerUrl] = useState('');
   const [open, setOpen] = useState(false);
 
@@ -22,9 +22,14 @@ const LineButton = () => {
     ? `https://line.me/R/ti/p/${lineId}`
     : `https://line.me/ti/p/~${lineId}`;
 
+  // Hide the whole widget until at least one channel is configured in Admin,
+  // so customers never see a button that links nowhere.
+  if (!lineId && !messengerUrl) return null;
+
   return (
     <div className="float-stack">
       {/* LINE */}
+      {lineId && (
       <a
         href={lineUrl}
         target="_blank"
@@ -37,10 +42,12 @@ const LineButton = () => {
         </svg>
         <span className="float-tooltip">LINE</span>
       </a>
+      )}
 
       {/* Messenger */}
+      {messengerUrl && (
       <a
-        href={messengerUrl || 'https://m.me/'}
+        href={messengerUrl}
         target="_blank"
         rel="noreferrer"
         className={`float-btn float-btn--messenger ${open ? 'visible' : ''}`}
@@ -51,6 +58,7 @@ const LineButton = () => {
         </svg>
         <span className="float-tooltip">Messenger</span>
       </a>
+      )}
 
       {/* Toggle button */}
       <button

@@ -36,7 +36,7 @@ const Footer = () => {
           setBusinessInfo({
             company_name: info.company_name || 'BS Build',
             phone: info.phone || '02-322-0000',
-            line_id: info.line_id || '@bsbuild',
+            line_id: info.line_id || '',
             address: info.address || 'กรุงเทพมหานคร'
           });
         }
@@ -112,10 +112,12 @@ const Footer = () => {
               <span className="contact-icon">📞</span>
               <p>Phone: {businessInfo.phone}</p>
             </div>
+            {businessInfo.line_id && (
             <div className="contact-item">
               <span className="contact-icon">📱</span>
               <p>Line: {businessInfo.line_id}</p>
             </div>
+            )}
             <div className="contact-item">
               <span className="contact-icon">📍</span>
               <p>Location: {businessInfo.address}</p>
