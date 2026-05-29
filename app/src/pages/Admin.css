@@ -1,96 +1,239 @@
-.admin-dashboard {
-  background-color: #f5f5f5;
-  color: #333;
-  min-height: 100vh;
-  padding: 3rem 1rem;
+/* ───────────────────────── Admin Dashboard ───────────────────────── */
+:root {
+  --adm-bg: #eef1f5;
+  --adm-card: #ffffff;
+  --adm-ink: #1f2937;
+  --adm-muted: #6b7280;
+  --adm-border: #e5e7eb;
+  --adm-accent: #b8860b;
+  --adm-accent-soft: #fdf6e3;
+  --adm-danger: #dc2626;
+  --adm-radius: 12px;
+  --adm-shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.05);
 }
 
+/* Light background behind the whole admin page (the site body is dark) */
+body:has(.admin-dashboard) { background: var(--adm-bg); }
+
+.admin-dashboard {
+  background-color: var(--adm-bg);
+  color: var(--adm-ink);
+  min-height: 100vh;
+  padding: 0 1rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── Header (sticky) ── */
 .admin-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3rem;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 1rem;
+  gap: 1rem;
+  padding: 1rem 0.25rem;
+  margin-bottom: 0;
+  background: var(--adm-bg);
+  border-bottom: 1px solid var(--adm-border);
 }
 
-.admin-section {
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  margin-bottom: 3rem;
+.admin-brand { display: flex; align-items: center; gap: 0.85rem; }
+.admin-brand-logo {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  background: var(--adm-ink);
+  color: var(--adm-accent);
+  font-weight: 800;
+  letter-spacing: .5px;
+  border-radius: 10px;
+  font-size: 1.1rem;
 }
+.admin-brand h1 { margin: 0; font-size: 1.3rem; color: var(--adm-ink); line-height: 1.1; }
+.admin-brand-sub { margin: 2px 0 0; font-size: .8rem; color: var(--adm-muted); }
+
+.admin-header-actions { display: flex; gap: .6rem; flex-shrink: 0; }
+
+.admin-btn {
+  border: none;
+  border-radius: 8px;
+  padding: .55rem 1rem;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.admin-btn-ghost { background: #fff; color: var(--adm-ink); border: 1px solid var(--adm-border); }
+.admin-btn-ghost:hover { background: #f3f4f6; }
+.admin-btn-danger { background: var(--adm-danger); color: #fff; }
+.admin-btn-danger:hover { background: #b91c1c; }
+
+/* ── Tab nav ── */
+.admin-tabs {
+  position: sticky;
+  top: 76px;
+  z-index: 19;
+  display: flex;
+  gap: .4rem;
+  flex-wrap: wrap;
+  padding: .75rem 0;
+  margin-bottom: 1.5rem;
+  background: var(--adm-bg);
+  border-bottom: 1px solid var(--adm-border);
+}
+.admin-tab {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--adm-muted);
+  padding: .5rem .9rem;
+  border-radius: 999px;
+  font-size: .88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .15s ease;
+}
+.admin-tab:hover { background: #fff; color: var(--adm-ink); }
+.admin-tab.active {
+  background: var(--adm-ink);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+/* ── Section card ── */
+.admin-section {
+  background-color: var(--adm-card);
+  padding: 2rem;
+  border-radius: var(--adm-radius);
+  box-shadow: var(--adm-shadow);
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--adm-border);
+  animation: admFade .25s ease;
+}
+@keyframes admFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 .admin-section h2 {
-  margin-bottom: 1.5rem;
-  color: #111;
+  margin: 0 0 1.5rem;
+  color: var(--adm-ink);
+  font-size: 1.35rem;
+  padding-bottom: .85rem;
+  border-bottom: 2px solid var(--adm-accent-soft);
 }
+.admin-section h3 { color: #374151; }
 
+/* ── Forms ── */
 .admin-form {
   display: flex;
   gap: 1rem;
   margin-bottom: 2rem;
   align-items: center;
   flex-wrap: wrap;
+  background: #fafbfc;
+  border: 1px solid var(--adm-border);
+  border-radius: 10px;
+  padding: 1.25rem;
 }
-
-.admin-form input {
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+  padding: .7rem .85rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
   flex: 1;
   min-width: 200px;
+  font-size: .92rem;
+  background: #fff;
+  transition: border-color .15s, box-shadow .15s;
 }
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+  outline: none;
+  border-color: var(--adm-accent);
+  box-shadow: 0 0 0 3px rgba(184,134,11,.12);
+}
+.admin-form label { font-size: .82rem; color: var(--adm-muted); font-weight: 600; }
 
-.admin-table-container {
-  overflow-x: auto;
-}
-
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.admin-table th, .admin-table td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid #eee;
-}
-
-.admin-table th {
-  background-color: #f9f9f9;
-  font-weight: 600;
-}
-
-.admin-thumb {
-  width: 60px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-/* Drag & Drop rows */
-.admin-table tbody tr[draggable] {
-  cursor: grab;
-}
-.admin-table tbody tr[draggable]:active {
-  cursor: grabbing;
-}
-.admin-table tbody tr.drag-over {
-  background: #e8f0fe !important;
-  outline: 2px dashed #4a6fa5;
-}
-
-.btn-delete {
-  background-color: #ff4d4f;
+/* Buttons used across admin (solid / outline / primary / secondary) */
+.btn.btn-solid, .btn-primary {
+  background: var(--adm-accent);
   color: #fff;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  padding: .6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter .15s;
+}
+.btn.btn-solid:hover, .btn-primary:hover { filter: brightness(1.07); }
+.btn.btn-outline, .btn-secondary {
+  background: #fff;
+  color: var(--adm-ink);
+  border: 1px solid var(--adm-border);
+  padding: .6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
 }
+.btn.btn-outline:hover, .btn-secondary:hover { background: #f3f4f6; }
 
-.btn-delete:hover {
-  background-color: #ff7875;
+/* ── Tables ── */
+.admin-table-container { overflow-x: auto; border-radius: 10px; border: 1px solid var(--adm-border); }
+.admin-table { width: 100%; border-collapse: collapse; }
+.admin-table th, .admin-table td {
+  padding: .85rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--adm-border);
+  font-size: .9rem;
+  vertical-align: middle;
+}
+.admin-table th {
+  background-color: #f9fafb;
+  font-weight: 700;
+  color: #374151;
+  text-transform: uppercase;
+  font-size: .72rem;
+  letter-spacing: .04em;
+}
+.admin-table tbody tr:hover { background: #fcfcfd; }
+.admin-table tbody tr:last-child td { border-bottom: none; }
+
+.admin-thumb { width: 64px; height: 44px; object-fit: cover; border-radius: 6px; border: 1px solid var(--adm-border); }
+
+/* Drag & Drop rows */
+.admin-table tbody tr[draggable] { cursor: grab; }
+.admin-table tbody tr[draggable]:active { cursor: grabbing; }
+.admin-table tbody tr.drag-over { background: var(--adm-accent-soft) !important; outline: 2px dashed var(--adm-accent); }
+
+/* Row action buttons */
+.btn-edit {
+  background: #eef2ff;
+  color: #4338ca;
+  border: none;
+  padding: .4rem .8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: .82rem;
+  font-weight: 600;
+}
+.btn-edit:hover { background: #e0e7ff; }
+.btn-delete {
+  background-color: #fee2e2;
+  color: var(--adm-danger);
+  border: none;
+  padding: .4rem .8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: .82rem;
+  font-weight: 600;
+}
+.btn-delete:hover { background-color: #fecaca; }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .admin-header { flex-direction: column; align-items: flex-start; }
+  .admin-tabs { top: 0; }
+  .admin-section { padding: 1.25rem; }
+  .admin-form { padding: 1rem; }
 }

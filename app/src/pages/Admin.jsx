@@ -2,6 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase/config';
+import './Admin.css';
 import {
   getProjects, getProject, getAllReviews, getCalculatorTypes, getServices,
   getBusinessInfo, getAllContent, getSettings, getAllReferences, getMenus,
@@ -610,18 +611,47 @@ const Admin = ({ setIsAuthenticated }) => {
   return (
     <div className="admin-dashboard container">
       <header className="admin-header">
-        <h1>Admin Dashboard</h1>
-        <div style={{ display: 'flex', gap: '1rem' }}>
-          <button onClick={() => navigate('/')} className="btn btn-outline" style={{ color: '#222', borderColor: '#222' }}>
-            Back to Website
+        <div className="admin-brand">
+          <span className="admin-brand-logo">BS</span>
+          <div>
+            <h1>Admin Dashboard</h1>
+            <p className="admin-brand-sub">BS Build — ระบบจัดการเว็บไซต์</p>
+          </div>
+        </div>
+        <div className="admin-header-actions">
+          <button onClick={() => navigate('/')} className="admin-btn admin-btn-ghost">
+            ← กลับหน้าเว็บ
           </button>
-          <button onClick={handleLogout} className="btn btn-solid" style={{ background: '#d32f2f' }}>
-            Logout
+          <button onClick={handleLogout} className="admin-btn admin-btn-danger">
+            ออกจากระบบ
           </button>
         </div>
       </header>
 
-      <section className="admin-section">
+      <nav className="admin-tabs">
+        {[
+          { key: 'inbox', label: '📥 กล่องข้อความ' },
+          { key: 'projects', label: '🏗️ ผลงาน' },
+          { key: 'references', label: '🖼️ รูปอ้างอิง' },
+          { key: 'reviews', label: '⭐ รีวิว' },
+          { key: 'services', label: '🛠️ บริการ' },
+          { key: 'calculator', label: '🧮 คำนวณราคา' },
+          { key: 'content', label: '📝 เนื้อหา' },
+          { key: 'hero', label: '🎬 Hero' },
+          { key: 'business', label: '🏢 ข้อมูลธุรกิจ' },
+          { key: 'settings', label: '⚙️ ตั้งค่า' },
+        ].map(t => (
+          <button
+            key={t.key}
+            className={`admin-tab ${activeTab === t.key ? 'active' : ''}`}
+            onClick={() => { setActiveTab(t.key); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          >
+            {t.label}
+          </button>
+        ))}
+      </nav>
+
+      <section className="admin-section" style={{ display: activeTab === 'business' ? 'block' : 'none' }}>
         <h2>Business Contact Information</h2>
         <form className="admin-form" onSubmit={handleSaveBusinessInfo}>
           <input
@@ -664,7 +694,7 @@ const Admin = ({ setIsAuthenticated }) => {
         </form>
       </section>
 
-      <section className="admin-section">
+      <section className="admin-section" style={{ display: activeTab === 'projects' ? 'block' : 'none' }}>
         <h2>Manage Featured Projects</h2>
 
         {/* Manage Process Images Modal */}
@@ -780,7 +810,7 @@ const Admin = ({ setIsAuthenticated }) => {
         </div>
       </section>
 
-      <section className="admin-section">
+      <section className="admin-section" style={{ display: activeTab === 'calculator' ? 'block' : 'none' }}>
         <h2>Calculator Configuration</h2>
 
         <form className="admin-form" onSubmit={handleAddCalculatorType}>
@@ -857,7 +887,7 @@ const Admin = ({ setIsAuthenticated }) => {
       </section>
 
       {/* ─── Reference Images ─── */}
-      <section className="admin-section" id="ref-form">
+      <section className="admin-section" id="ref-form" style={{ display: activeTab === 'references' ? 'block' : 'none' }}>
         <h2>Manage Reference Images</h2>
 
         <form className="admin-form" onSubmit={handleAddReference}>
@@ -920,7 +950,7 @@ const Admin = ({ setIsAuthenticated }) => {
       </section>
 
       {/* ─── Hero Background (Image or Video) ─── */}
-      <section className="admin-section">
+      <section className="admin-section" style={{ display: activeTab === 'hero' ? 'block' : 'none' }}>
         <h2>🖼️ Hero Background (รูป / วิดีโอ)</h2>
         <p style={{ color: '#888', marginBottom: '1rem', fontSize: '0.9rem' }}>
           พื้นหลังของส่วน Hero — รองรับทั้ง <strong>รูปภาพ</strong> และ <strong>วิดีโอเต็มเฟรม</strong>
@@ -1125,7 +1155,7 @@ const Admin = ({ setIsAuthenticated }) => {
         </div>
       </section>
 
-      <section className="admin-section">
+      <section className="admin-section" style={{ display: activeTab === 'reviews' ? 'block' : 'none' }}>
         <h2>Manage Client Reviews</h2>
 
         <form className="admin-form" onSubmit={handleAddReview}>
@@ -1215,7 +1245,7 @@ const Admin = ({ setIsAuthenticated }) => {
         </div>
       </section>
 
-      <section className="admin-section">
+      <section className="admin-section" style={{ display: activeTab === 'inbox' ? 'block' : 'none' }}>
         <h2>Customer Inquiries (Inbox)</h2>
         <div className="admin-table-container">
           <table className="admin-table">
@@ -1246,7 +1276,7 @@ const Admin = ({ setIsAuthenticated }) => {
         </div>
       </section>
 
-      <section className="admin-section">
+      <section className="admin-section" style={{ display: activeTab === 'content' ? 'block' : 'none' }}>
         <h2>Manage Website Content (Thai Text)</h2>
         <div className="admin-table-container">
           <table className="admin-table">
@@ -1290,7 +1320,7 @@ const Admin = ({ setIsAuthenticated }) => {
         )}
       </section>
 
-      <section className="admin-section">
+      <section className="admin-section" style={{ display: activeTab === 'services' ? 'block' : 'none' }}>
         <h2>Manage Services</h2>
 
         <form className="admin-form" onSubmit={handleSaveService}>
@@ -1363,7 +1393,7 @@ const Admin = ({ setIsAuthenticated }) => {
         </div>
       </section>
 
-      <section className="admin-section">
+      <section className="admin-section" style={{ display: activeTab === 'settings' ? 'block' : 'none' }}>
         <h2>Website Settings</h2>
         <form className="admin-form" onSubmit={handleSaveSettings}>
           <div className="form-group">
