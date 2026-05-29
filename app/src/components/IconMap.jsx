@@ -5,18 +5,20 @@ import * as Icon from 'react-feather';
  */
 const iconMap = {
   // Emoji support (backward compatibility)
-  '🎨': 'Layers',
-  '🔨': 'Hammer',
+  '🎨': 'PenTool',
+  '🔨': 'Tool',
   '🪟': 'Square',
-  '🛠️': 'Wrench',
+  '🛠️': 'Tool',
   '🎪': 'Home',
   '✨': 'Star',
 
-  // Direct icon name support (PascalCase as used by react-feather)
+  // Direct icon name support (mapped to icons that exist in react-feather)
   'layers': 'Layers',
-  'hammer': 'Hammer',
+  'palette': 'PenTool',
+  'hammer': 'Tool',
+  'tool': 'Tool',
   'square': 'Square',
-  'wrench': 'Wrench',
+  'wrench': 'Tool',
   'home': 'Home',
   'star': 'Star',
   'pen-tool': 'PenTool',
@@ -24,8 +26,8 @@ const iconMap = {
   'aperture': 'Aperture',
   'check-circle': 'CheckCircle',
   'building': 'Home',
-  'hammer-icon': 'Hammer',
-  'paintbrush': 'Layers',
+  'hammer-icon': 'Tool',
+  'paintbrush': 'PenTool',
   'window': 'Square',
 };
 

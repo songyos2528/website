@@ -1,6 +1,6 @@
 .footer {
-  background-color: #080809;
-  padding-top: 5rem;
+  background-color: var(--ink-deep);
+  padding-top: clamp(4rem, 7vw, 6rem);
   color: var(--text-light);
 }
 
@@ -12,11 +12,14 @@
 }
 
 .footer-title {
-  font-family: var(--font-heading);
-  font-size: 3rem;
-  line-height: 1.2;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   margin-bottom: 2rem;
+  color: var(--text-light);
 }
+.footer .logo-text { color: var(--text-light); }
 
 .footer-contact-info {
   display: flex;
@@ -28,7 +31,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: var(--text-muted);
+  color: rgba(246, 243, 238, 0.7);
 }
 
 .contact-item p {
@@ -76,7 +79,7 @@
 }
 
 .copyright {
-  color: var(--text-muted);
+  color: rgba(246, 243, 238, 0.5);
   font-size: 0.8rem;
   margin-top: 1rem;
 }

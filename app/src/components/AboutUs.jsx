@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { getContentByKey, getSettings } from '../firebase/api';
+import { useCountUp } from '../lib/motion';
 import './AboutUs.css';
 
 const AboutUs = () => {
@@ -11,6 +12,9 @@ const AboutUs = () => {
     team: '30',
     satisfaction: '95'
   });
+  const projectsRef = useCountUp(stats.projects, { suffix: '+' });
+  const teamRef = useCountUp(stats.team, { suffix: '+' });
+  const satisfactionRef = useCountUp(stats.satisfaction, { suffix: '%' });
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -51,15 +55,15 @@ const AboutUs = () => {
           </p>
           <div className="about-stats">
             <div className="stat-item">
-              <h3 className="stat-number">{stats.projects}+</h3>
+              <h3 className="stat-number" ref={projectsRef}>{stats.projects}+</h3>
               <p className="stat-label">Projects</p>
             </div>
             <div className="stat-item">
-              <h3 className="stat-number">{stats.team}+</h3>
+              <h3 className="stat-number" ref={teamRef}>{stats.team}+</h3>
               <p className="stat-label">Structural Experts</p>
             </div>
             <div className="stat-item">
-              <h3 className="stat-number">{stats.satisfaction}%</h3>
+              <h3 className="stat-number" ref={satisfactionRef}>{stats.satisfaction}%</h3>
               <p className="stat-label">Happy Clients</p>
             </div>
           </div>

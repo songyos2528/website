@@ -1,88 +1,78 @@
 .about-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: clamp(3rem, 6vw, 6rem);
   align-items: center;
 }
 
-.text-left {
-  text-align: left;
-  margin-bottom: 2rem;
-}
+.text-left { text-align: left; margin-bottom: 1.5rem; }
 
 .about-text {
-  font-size: 1.1rem;
-  color: var(--text-muted);
+  font-size: 1.12rem;
+  color: var(--ink-soft);
   margin-bottom: 3rem;
-  line-height: 1.8;
+  line-height: 1.85;
+  max-width: 46ch;
 }
 
 .about-stats {
   display: flex;
-  gap: 3rem;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  flex-wrap: wrap;
 }
 
 .stat-item {
   text-align: left;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--gold);
 }
 
 .stat-number {
-  font-family: var(--font-heading);
-  font-size: 2.5rem;
-  color: var(--color-accent);
-  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 .stat-label {
-  font-size: 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text-light);
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
 }
 
 .about-image-wrapper {
   position: relative;
   width: 100%;
-  height: 500px;
-}
-
-.placeholder-image {
-  width: 100%;
-  height: 100%;
-  background-color: var(--bg-card);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  position: relative;
-  z-index: 2;
-  color: var(--text-muted);
-  border: 1px dashed var(--text-muted);
+  height: clamp(380px, 48vw, 560px);
 }
 
 .about-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 6px;
   position: relative;
   z-index: 2;
 }
 
 .about-image-accent {
   position: absolute;
-  top: 2rem;
-  right: -2rem;
+  top: 1.75rem;
+  right: -1.75rem;
   width: 100%;
   height: 100%;
-  background-color: var(--color-accent);
+  background-color: var(--gold);
   z-index: 1;
-  border-radius: 4px;
-  opacity: 0.2;
+  border-radius: 6px;
+  opacity: 0.16;
 }
 
 @media (max-width: 768px) {
-  .about-container {
-    grid-template-columns: 1fr;
-  }
+  .about-container { grid-template-columns: 1fr; }
+  .about-image-accent { right: -1rem; top: 1rem; }
 }

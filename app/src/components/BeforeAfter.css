@@ -1,45 +1,26 @@
-.before-after {
-  background-color: var(--bg-dark);
-}
+.before-after { background-color: var(--bg); }
 
-.text-center {
-  text-align: center;
-}
-
-.mb-3 {
-  margin-bottom: 3rem;
-}
+.text-center { text-align: center; }
+.mb-3 { margin-bottom: 3rem; }
 
 .slider-container {
   position: relative;
   width: 100%;
-  max-width: 800px;
-  height: 500px;
-  margin: 0 auto;
+  max-width: 900px;
+  height: clamp(320px, 50vw, 560px);
+  margin: 3rem auto 0;
   overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border-radius: 10px;
+  box-shadow: 0 30px 70px rgba(26, 23, 20, 0.16);
+  border: 1px solid var(--line);
 }
 
-.image-before, .image-after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.image-before img, .image-after img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+.image-before, .image-after { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.image-before img, .image-after img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .slider-input {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
@@ -51,11 +32,12 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 4px;
-  background-color: var(--color-accent);
+  width: 2px;
+  background-color: #fff;
   z-index: 5;
   pointer-events: none;
   transform: translateX(-50%);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
 }
 
 .slider-button {
@@ -63,21 +45,17 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-  background-color: var(--color-accent);
-  color: var(--bg-dark);
+  width: 48px;
+  height: 48px;
+  background-color: #fff;
+  color: var(--gold);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 1.2rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  font-size: 1.3rem;
+  box-shadow: 0 6px 20px rgba(26, 23, 20, 0.25);
 }
 
-@media (max-width: 768px) {
-  .slider-container {
-    height: 300px;
-  }
-}
+@media (max-width: 768px) { .slider-container { height: 320px; } }

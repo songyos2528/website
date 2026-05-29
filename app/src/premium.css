@@ -1,11 +1,11 @@
-/* Premium UI Enhancements */
+/* Premium UI Enhancements (light editorial) */
 
 /* Skeleton Loader */
 .skeleton {
-  background: linear-gradient(90deg, var(--bg-card) 25%, #2a2a2a 50%, var(--bg-card) 75%);
+  background: linear-gradient(90deg, #ece8e1 25%, #f5f2ec 50%, #ece8e1 75%);
   background-size: 200% 100%;
-  animation: loading 1.5s infinite;
-  border-radius: 4px;
+  animation: loading 1.4s infinite;
+  border-radius: 6px;
 }
 
 @keyframes loading {
@@ -15,34 +15,22 @@
 
 .skeleton-title { height: 2.5rem; width: 60%; margin-bottom: 1rem; }
 .skeleton-text { height: 1rem; margin-bottom: 0.5rem; }
-.skeleton-input { height: 3rem; width: 100%; margin-bottom: 1.5rem; border-radius: 4px; }
-.skeleton-btn { height: 3rem; width: 100%; border-radius: 4px; }
+.skeleton-input { height: 3rem; width: 100%; margin-bottom: 1.5rem; border-radius: 6px; }
+.skeleton-btn { height: 3rem; width: 100%; border-radius: 6px; }
 
-/* Button Glow & Hover */
-.btn-solid {
-  transition: all 0.3s ease !important;
-}
-
-.btn-solid:hover {
-  box-shadow: 0 0 15px rgba(199, 161, 83, 0.4);
-  transform: translateY(-2px);
-}
+/* Button hover lift */
+.btn-solid { transition: all 0.3s var(--ease) !important; }
+.btn-solid:hover { transform: translateY(-2px); }
 
 /* Project Image Zoom */
-.project-img {
-  transition: transform 0.5s ease !important;
-}
-
-.project-card:hover .project-img {
-  transform: scale(1.05);
-}
+.project-img { transition: transform 0.6s var(--ease) !important; }
+.project-card:hover .project-img { transform: scale(1.06); }
 
 .project-card {
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
 }
-
 .project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 22px 48px rgba(26, 23, 20, 0.12);
 }
