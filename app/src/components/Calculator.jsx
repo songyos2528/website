@@ -129,7 +129,7 @@ const Calculator = () => {
                   <span className="price-max">{fmt(estimate.max)}</span>
                 </div>
                 <p className="disclaimer">*ราคาประเมินเบื้องต้น อาจเปลี่ยนแปลงตามหน้างานจริง</p>
-                <a href="#contact" className="btn btn-solid calc-cta">ปรึกษาสถาปนิกฟรี →</a>
+                <a href="#contact" className="btn btn-solid calc-cta">ขอใบเสนอราคาฟรี →</a>
               </div>
             )}
           </div>

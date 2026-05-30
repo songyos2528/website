@@ -3,7 +3,7 @@
   height: 100vh;
   min-height: 600px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   overflow: hidden;
   background: var(--ink-deep);
 }
@@ -26,15 +26,17 @@
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(to top, rgba(18,15,11,0.78) 0%, rgba(18,15,11,0.12) 45%, rgba(18,15,11,0.30) 100%),
-    linear-gradient(to right, rgba(18,15,11,0.45) 0%, rgba(18,15,11,0) 55%);
+    linear-gradient(to right, rgba(18,15,11,0.72) 0%, rgba(18,15,11,0.35) 30%, rgba(18,15,11,0) 60%),
+    linear-gradient(to top, rgba(18,15,11,0.35) 0%, rgba(18,15,11,0.05) 40%, rgba(18,15,11,0.25) 100%);
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  padding-bottom: clamp(4rem, 10vh, 7rem);
-  max-width: 560px;
+  max-width: 440px;
+  margin: 0 auto 0 0;            /* anchor to the left, not centered */
+  padding: 0;
+  margin-left: clamp(1.5rem, 5vw, 6rem);
 }
 
 .hero-eyebrow {

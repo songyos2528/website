@@ -50,7 +50,7 @@ const Hero = () => {
         <p className="hero-eyebrow">BS BUILD · PROFESSIONAL CONSTRUCTION</p>
         <h1 className="hero-title">{content.title}</h1>
         <p className="hero-description">{content.description}</p>
-        <a href="#contact" className="btn btn-solid hero-cta">ปรึกษาสถาปนิกฟรี</a>
+        <a href="#contact" className="btn btn-solid hero-cta">ปรึกษาฟรี</a>
       </div>
 
       <div className="hero-scroll-cue" aria-hidden="true"></div>
