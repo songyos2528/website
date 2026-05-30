@@ -6,12 +6,12 @@ import './Hero.css';
 const Hero = () => {
   const [content, setContent] = useState({
     title: 'EXCEPTIONAL CRAFTSMANSHIP',
-    description: 'ทีมงานมืออาชีพ | ประสบการณ์ 30+ ปี',
+    description: 'ต่อเติม · รีโนเวท · ครบวงจร',
   });
   const [heroImg, setHeroImg] = useState('/website/hero.jpg');
   const [mediaType, setMediaType] = useState('image');
   const apiUrl = import.meta.env.VITE_API_URL || '';
-  const parallaxRef = useParallax(0.12);
+  const parallaxRef = useParallax(0.15);
 
   useEffect(() => {
     getImages('hero')
@@ -39,28 +39,21 @@ const Hero = () => {
 
   return (
     <section className="hero" id="home">
-      <div className="container hero-grid">
-        <div className="hero-text" data-aos="fade-up">
-          <p className="hero-eyebrow">BS BUILD · PROFESSIONAL CONSTRUCTION</p>
-          <h1 className="hero-title">{content.title}</h1>
-          <p className="hero-description">{content.description}</p>
-          <div className="hero-actions">
-            <a href="#contact" className="btn btn-solid">ปรึกษาสถาปนิกฟรี</a>
-            <a href="#projects" className="hero-link">ดูผลงาน →</a>
-          </div>
-        </div>
+      {mediaType === 'video' ? (
+        <video ref={parallaxRef} className="hero-bg" src={src} autoPlay loop muted playsInline aria-hidden="true" />
+      ) : (
+        <div ref={parallaxRef} className="hero-bg" style={{ backgroundImage: `url(${src})` }} aria-hidden="true" />
+      )}
+      <div className="hero-scrim" aria-hidden="true"></div>
 
-        <div className="hero-media" data-aos="fade-left" data-aos-delay="150">
-          <div className="hero-media-frame">
-            {mediaType === 'video' ? (
-              <video ref={parallaxRef} className="hero-img" src={src} autoPlay loop muted playsInline />
-            ) : (
-              <img ref={parallaxRef} className="hero-img" src={src} alt="งานตกแต่งและต่อเติมระดับพรีเมียม" />
-            )}
-          </div>
-          <span className="hero-badge"><strong>30+</strong> ปีประสบการณ์</span>
-        </div>
+      <div className="container hero-content" data-aos="fade-up">
+        <p className="hero-eyebrow">BS BUILD · PROFESSIONAL CONSTRUCTION</p>
+        <h1 className="hero-title">{content.title}</h1>
+        <p className="hero-description">{content.description}</p>
+        <a href="#contact" className="btn btn-solid hero-cta">ปรึกษาสถาปนิกฟรี</a>
       </div>
+
+      <div className="hero-scroll-cue" aria-hidden="true"></div>
     </section>
   );
 };
