@@ -98,7 +98,20 @@
   100% { opacity: 0; transform: translateY(12px); }
 }
 
-@media (max-width: 600px) {
-  .hero-content { padding-bottom: 4.5rem; }
-  .hero-cta { width: 100%; }
+@media (max-width: 768px) {
+  .hero { align-items: flex-end; }
+  /* Darken more at the bottom so the bottom-anchored text always reads */
+  .hero-scrim {
+    background:
+      linear-gradient(to top, rgba(18,15,11,0.88) 0%, rgba(18,15,11,0.5) 32%, rgba(18,15,11,0.18) 62%, rgba(18,15,11,0.35) 100%);
+  }
+  .hero-content {
+    max-width: 100%;
+    margin: 0;
+    padding: 0 1.5rem clamp(3rem, 11vh, 5rem);
+  }
+  .hero-eyebrow { font-size: 0.6rem; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
+  .hero-title { font-size: clamp(2.1rem, 9vw, 3rem); }
+  .hero-description { font-size: 0.95rem; margin-bottom: 1.5rem; }
+  .hero-cta { width: auto; align-self: flex-start; }
 }

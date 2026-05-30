@@ -59,6 +59,8 @@ a { text-decoration: none; color: inherit; transition: color .3s var(--ease); }
 ul { list-style: none; }
 button { cursor: pointer; font-family: var(--font-body); }
 img { max-width: 100%; display: block; }
+a, button { -webkit-tap-highlight-color: transparent; }
+.btn { -webkit-tap-highlight-color: transparent; }
 
 .container { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; }
 
