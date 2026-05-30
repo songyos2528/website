@@ -5,7 +5,6 @@ import './BeforeAfter.css';
 const BeforeAfter = () => {
   const [sliderPos, setSliderPos] = useState(50);
   const containerRef = useRef(null);
-  const draggingRef = useRef(false);
   const [images, setImages] = useState({
     after: '/website/after_living_room.png',
     before: '/website/before_living_room.png'
@@ -45,16 +44,21 @@ const BeforeAfter = () => {
     const el = containerRef.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
-    let p = ((clientX - r.left) / r.width) * 100;
+    const p = ((clientX - r.left) / r.width) * 100;
     setSliderPos(Math.max(2, Math.min(98, p)));
   };
-  const onPointerDown = (e) => {
-    draggingRef.current = true;
-    containerRef.current?.setPointerCapture?.(e.pointerId);
+  // Single press-and-drag: bind move/up on the document so dragging starts
+  // immediately from the first pointer-down (no second click needed).
+  const startDrag = (e) => {
     setPosFromX(e.clientX);
+    const move = (ev) => setPosFromX(ev.clientX);
+    const up = () => {
+      document.removeEventListener('pointermove', move);
+      document.removeEventListener('pointerup', up);
+    };
+    document.addEventListener('pointermove', move);
+    document.addEventListener('pointerup', up);
   };
-  const onPointerMove = (e) => { if (draggingRef.current) setPosFromX(e.clientX); };
-  const stopDrag = () => { draggingRef.current = false; };
 
   if (loading) {
     return (
@@ -76,10 +80,7 @@ const BeforeAfter = () => {
         <div
           className="slider-container"
           ref={containerRef}
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={stopDrag}
-          onPointerCancel={stopDrag}
+          onPointerDown={startDrag}
         >
           <div className="image-after">
             <img src={images.after} alt="After Renovation" loading="lazy" decoding="async" />

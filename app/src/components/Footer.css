@@ -62,9 +62,16 @@
 }
 
 .contact-form input:focus,
-.contact-form textarea:focus {
+.contact-form textarea:focus,
+.contact-form select:focus {
   outline: none;
   border-color: var(--color-accent);
+}
+
+/* Dropdown options render with the OS list — force readable dark text on white */
+.contact-form select option {
+  color: #1c1b18;
+  background: #ffffff;
 }
 
 .submit-btn {

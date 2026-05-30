@@ -1,7 +1,9 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import MarqueeLib from 'react-fast-marquee';
 import { getProjects, getProject } from '../firebase/api';
-import { useHorizontalPin } from '../lib/motion';
 import './FeaturedProjects.css';
+
+const Marquee = MarqueeLib?.default || MarqueeLib;
 
 const CATEGORY_LABELS = {
   interior: 'ตกแต่งภายใน',
@@ -16,6 +18,7 @@ const FeaturedProjects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [projectDetail, setProjectDetail] = useState(null);
   const [detailLoading, setDetailLoading] = useState(false);
+  const [procIdx, setProcIdx] = useState(0);
 
   const apiUrl = import.meta.env.VITE_API_URL || '';
 
@@ -25,23 +28,17 @@ const FeaturedProjects = () => {
       .catch(err => { console.error('Failed to fetch projects:', err); setLoading(false); });
   }, []);
 
-  // Lock body scroll when modal open
   useEffect(() => {
-    if (selectedProject) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = selectedProject ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [selectedProject]);
 
   const filteredProjects = (projects || []).filter(p => filter === 'all' || (p.category || 'renovation') === filter);
 
-  // Pinned horizontal scroll on desktop (recomputes when the filtered set changes)
-  const { sectionRef, trackRef } = useHorizontalPin([filteredProjects.length, loading]);
-
   const handleOpenDetail = async (project) => {
     setSelectedProject(project);
+    setProjectDetail(null);
+    setProcIdx(0);
     setDetailLoading(true);
     try {
       const data = await getProject(project.id);
@@ -62,48 +59,53 @@ const FeaturedProjects = () => {
   const getImgSrc = (img) =>
     img && img.startsWith('http') ? img : `${apiUrl}${img}`;
 
-  return (
-    <section className="featured-projects" id="projects" ref={sectionRef}>
-      <div className="fp-sticky">
-        <div className="container fp-head">
-          <div>
-            <p className="eyebrow">Selected Works</p>
-            <h2 className="section-title">ผลงานที่ผ่านมา</h2>
-          </div>
-          <div className="project-filters">
-            <button className={`filter-btn ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>ทั้งหมด</button>
-            <button className={`filter-btn ${filter === 'interior' ? 'active' : ''}`} onClick={() => setFilter('interior')}>ตกแต่งภายใน</button>
-            <button className={`filter-btn ${filter === 'exterior' ? 'active' : ''}`} onClick={() => setFilter('exterior')}>ต่อเติมภายนอก</button>
-            <button className={`filter-btn ${filter === 'renovation' ? 'active' : ''}`} onClick={() => setFilter('renovation')}>รีโนเวท</button>
-          </div>
-        </div>
+  const processImages = projectDetail?.process_images || [];
+  const goProc = (dir) => setProcIdx(i => {
+    const n = processImages.length;
+    return (i + dir + n) % n;
+  });
 
-        {loading ? (
-          <p style={{ textAlign: 'center' }}>Loading projects...</p>
-        ) : (
-          <div className="fp-track" ref={trackRef}>
-            {filteredProjects.map((project, i) => (
-              <article className="project-card fp-card" key={project.id} onClick={() => handleOpenDetail(project)}>
-                <div className="project-img-wrapper">
-                  <img src={getImgSrc(project.img)} alt={project.title} className="project-img" decoding="async" />
-                  <span className="fp-index">{String(i + 1).padStart(2, '0')}</span>
-                  <div className="project-overlay">
-                    <span className="project-btn">ดูรายละเอียด</span>
-                  </div>
-                </div>
-                <div className="project-info">
-                  <span className="project-cat">{CATEGORY_LABELS[project.category] || 'รีโนเวท'}</span>
-                  <h3 className="project-title">{project.title}</h3>
-                </div>
-              </article>
-            ))}
-            <div className="fp-end">
-              <p className="eyebrow">Let's build</p>
-              <a href="#contact" className="btn btn-solid">ปรึกษาสถาปนิกฟรี</a>
-            </div>
-          </div>
-        )}
+  const renderCard = (project) => (
+    <article className="project-card fp-card" key={project.id} onClick={() => handleOpenDetail(project)}>
+      <div className="project-img-wrapper">
+        <img src={getImgSrc(project.img)} alt={project.title} className="project-img" decoding="async" />
+        <div className="project-overlay">
+          <span className="project-btn">ดูรายละเอียด</span>
+        </div>
       </div>
+      <div className="project-info">
+        <span className="project-cat">{CATEGORY_LABELS[project.category] || 'รีโนเวท'}</span>
+        <h3 className="project-title">{project.title}</h3>
+      </div>
+    </article>
+  );
+
+  return (
+    <section className="featured-projects" id="projects">
+      <div className="container fp-head" data-aos="fade-up">
+        <div>
+          <p className="eyebrow">Selected Works</p>
+          <h2 className="section-title">ผลงานที่ผ่านมา</h2>
+        </div>
+        <div className="project-filters">
+          <button className={`filter-btn ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>ทั้งหมด</button>
+          <button className={`filter-btn ${filter === 'interior' ? 'active' : ''}`} onClick={() => setFilter('interior')}>ตกแต่งภายใน</button>
+          <button className={`filter-btn ${filter === 'exterior' ? 'active' : ''}`} onClick={() => setFilter('exterior')}>ต่อเติมภายนอก</button>
+          <button className={`filter-btn ${filter === 'renovation' ? 'active' : ''}`} onClick={() => setFilter('renovation')}>รีโนเวท</button>
+        </div>
+      </div>
+
+      {loading ? (
+        <p style={{ textAlign: 'center' }}>Loading projects...</p>
+      ) : filteredProjects.length === 0 ? (
+        <p style={{ textAlign: 'center', color: 'var(--ink-soft)' }}>ยังไม่มีผลงานในหมวดนี้</p>
+      ) : (
+        <div className="fp-marquee">
+          <Marquee pauseOnHover speed={38} gradient={true} gradientColor={[247, 245, 241]} gradientWidth={90}>
+            {filteredProjects.map(renderCard)}
+          </Marquee>
+        </div>
+      )}
 
       {/* Detail Modal */}
       {selectedProject && (
@@ -122,7 +124,7 @@ const FeaturedProjects = () => {
               <h2 className="project-modal-title">{selectedProject.title}</h2>
 
               {detailLoading ? (
-                <p style={{ color: '#888', textAlign: 'center', padding: '2rem' }}>กำลังโหลด...</p>
+                <p style={{ color: 'var(--ink-soft)', textAlign: 'center', padding: '2rem' }}>กำลังโหลด...</p>
               ) : (
                 <>
                   {projectDetail?.description && (
@@ -132,22 +134,41 @@ const FeaturedProjects = () => {
                     </div>
                   )}
 
-                  {projectDetail?.process_images?.length > 0 && (
+                  {processImages.length > 0 && (
                     <div className="project-modal-process">
                       <h4>ภาพระหว่างดำเนินการ</h4>
-                      <div className="process-images-grid">
-                        {projectDetail.process_images.map(img => (
-                          <div key={img.id} className="process-image-item">
-                            <img src={getImgSrc(img.img_path)} alt={img.caption || 'ระหว่างดำเนินการ'} />
-                            {img.caption && <p>{img.caption}</p>}
+                      <div className="proc-slider">
+                        <div className="proc-stage">
+                          <img src={getImgSrc(processImages[procIdx].img_path)} alt={processImages[procIdx].caption || 'ระหว่างดำเนินการ'} />
+                          {processImages.length > 1 && (
+                            <>
+                              <button className="proc-nav proc-prev" onClick={() => goProc(-1)} aria-label="ก่อนหน้า">‹</button>
+                              <button className="proc-nav proc-next" onClick={() => goProc(1)} aria-label="ถัดไป">›</button>
+                              <span className="proc-counter">{procIdx + 1} / {processImages.length}</span>
+                            </>
+                          )}
+                        </div>
+                        {processImages[procIdx].caption && (
+                          <p className="proc-caption">{processImages[procIdx].caption}</p>
+                        )}
+                        {processImages.length > 1 && (
+                          <div className="proc-dots">
+                            {processImages.map((img, i) => (
+                              <button
+                                key={img.id ?? i}
+                                className={`proc-dot ${i === procIdx ? 'active' : ''}`}
+                                onClick={() => setProcIdx(i)}
+                                aria-label={`รูปที่ ${i + 1}`}
+                              />
+                            ))}
                           </div>
-                        ))}
+                        )}
                       </div>
                     </div>
                   )}
 
-                  {!projectDetail?.description && !projectDetail?.process_images?.length && (
-                    <p style={{ color: '#888', textAlign: 'center', padding: '1rem 0' }}>ยังไม่มีรายละเอียดเพิ่มเติม</p>
+                  {!projectDetail?.description && processImages.length === 0 && (
+                    <p style={{ color: 'var(--ink-soft)', textAlign: 'center', padding: '1rem 0' }}>ยังไม่มีรายละเอียดเพิ่มเติม</p>
                   )}
                 </>
               )}
@@ -160,4 +181,3 @@ const FeaturedProjects = () => {
 };
 
 export default FeaturedProjects;
-
