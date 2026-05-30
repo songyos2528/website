@@ -11,46 +11,154 @@
 .project-filters {
   display: flex;
   justify-content: center;
-  gap: 0.75rem;
-  margin-bottom: 3rem;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  margin-bottom: 3.5rem;
   flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.85rem;
 }
 
 .filter-btn {
   background: transparent;
-  border: 1px solid var(--line);
+  border: none;
   color: var(--ink-soft);
-  padding: 0.5rem 1.4rem;
-  border-radius: 30px;
+  padding: 0.5rem 0.25rem;
   cursor: pointer;
   font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   transition: all 0.3s var(--ease);
+  position: relative;
 }
-.filter-btn:hover { border-color: var(--gold); color: var(--gold); }
-.filter-btn.active {
-  background: var(--ink);
-  color: #fff;
-  border-color: var(--ink);
+.filter-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -0.95rem;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--gold);
+  transition: width 0.3s var(--ease);
 }
+.filter-btn:hover { color: var(--gold); }
+.filter-btn.active { color: var(--ink); }
+.filter-btn.active::after { width: 100%; }
 
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+/* ── Pinned horizontal showcase ── */
+.featured-projects { text-align: left; padding: clamp(4.5rem, 9vw, 8rem) 0; }
+.fp-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem 2.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+.fp-head .section-title { margin-bottom: 0; }
+.fp-head .project-filters { margin-bottom: 0; }
+
+/* category label on card */
+.project-cat {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* big index number on image */
+.fp-index {
+  position: absolute;
+  top: 0.75rem;
+  left: 1rem;
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #fff;
+  opacity: 0.85;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Mobile / fallback: simple vertical grid */
+.fp-track {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.75rem;
+  padding: 0 2rem;
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+.fp-card { cursor: pointer; }
+.fp-end { display: none; }
+
+/* Desktop: scroll-jack horizontal */
+@media (min-width: 992px) {
+  .featured-projects { padding: 0; }          /* height set by JS */
+  .fp-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .fp-head {
+    max-width: var(--maxw);
+    width: 100%;
+    margin: 0 auto 2.5rem;
+    padding: 0 2rem;
+    flex-wrap: nowrap;
+  }
+  .fp-track {
+    display: flex;
+    grid-template-columns: none;
+    gap: 1.75rem;
+    max-width: none;
+    margin: 0;
+    padding: 0 max(2rem, calc((100vw - var(--maxw)) / 2 + 2rem));
+    will-change: transform;
+  }
+  .fp-card {
+    flex: 0 0 auto;
+    width: clamp(320px, 30vw, 440px);
+  }
+  .fp-end {
+    flex: 0 0 auto;
+    width: clamp(260px, 22vw, 340px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1.25rem;
+    padding-left: 1rem;
+  }
 }
 
 .project-card {
   background-color: var(--surface);
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 1px 2px rgba(26, 23, 20, 0.04);
-  border: 1px solid var(--line);
-  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
+  box-shadow: 0 15px 40px rgba(26, 23, 20, 0.02);
+  border: none;
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
   text-align: left;
 }
-.project-card:hover { border-color: rgba(168, 124, 50, 0.35); }
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 35px 70px rgba(26, 23, 20, 0.08);
+}
 
 .project-img-wrapper {
   position: relative;

@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { getProjects, getProject } from '../firebase/api';
+import { useHorizontalPin } from '../lib/motion';
 import './FeaturedProjects.css';
 
 const CATEGORY_LABELS = {
@@ -36,6 +37,9 @@ const FeaturedProjects = () => {
 
   const filteredProjects = (projects || []).filter(p => filter === 'all' || (p.category || 'renovation') === filter);
 
+  // Pinned horizontal scroll on desktop (recomputes when the filtered set changes)
+  const { sectionRef, trackRef } = useHorizontalPin([filteredProjects.length, loading]);
+
   const handleOpenDetail = async (project) => {
     setSelectedProject(project);
     setDetailLoading(true);
@@ -59,37 +63,44 @@ const FeaturedProjects = () => {
     img && img.startsWith('http') ? img : `${apiUrl}${img}`;
 
   return (
-    <section className="featured-projects section" id="projects">
-      <div className="container" data-aos="fade-up">
-        <h2 className="section-title">Featured Projects</h2>
-
-        <div className="project-filters">
-          <button className={`filter-btn ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>ทั้งหมด</button>
-          <button className={`filter-btn ${filter === 'interior' ? 'active' : ''}`} onClick={() => setFilter('interior')}>ตกแต่งภายใน</button>
-          <button className={`filter-btn ${filter === 'exterior' ? 'active' : ''}`} onClick={() => setFilter('exterior')}>ต่อเติมภายนอก</button>
-          <button className={`filter-btn ${filter === 'renovation' ? 'active' : ''}`} onClick={() => setFilter('renovation')}>รีโนเวท</button>
+    <section className="featured-projects" id="projects" ref={sectionRef}>
+      <div className="fp-sticky">
+        <div className="container fp-head">
+          <div>
+            <p className="eyebrow">Selected Works</p>
+            <h2 className="section-title">ผลงานที่ผ่านมา</h2>
+          </div>
+          <div className="project-filters">
+            <button className={`filter-btn ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>ทั้งหมด</button>
+            <button className={`filter-btn ${filter === 'interior' ? 'active' : ''}`} onClick={() => setFilter('interior')}>ตกแต่งภายใน</button>
+            <button className={`filter-btn ${filter === 'exterior' ? 'active' : ''}`} onClick={() => setFilter('exterior')}>ต่อเติมภายนอก</button>
+            <button className={`filter-btn ${filter === 'renovation' ? 'active' : ''}`} onClick={() => setFilter('renovation')}>รีโนเวท</button>
+          </div>
         </div>
 
         {loading ? (
           <p style={{ textAlign: 'center' }}>Loading projects...</p>
         ) : (
-          <div className="projects-grid">
-            {filteredProjects.map(project => (
-              <div className="project-card" key={project.id} data-aos="zoom-in" data-aos-duration="500" onClick={() => handleOpenDetail(project)} style={{ cursor: 'pointer' }}>
+          <div className="fp-track" ref={trackRef}>
+            {filteredProjects.map((project, i) => (
+              <article className="project-card fp-card" key={project.id} onClick={() => handleOpenDetail(project)}>
                 <div className="project-img-wrapper">
-                  <img src={getImgSrc(project.img)} alt={project.title} className="project-img" />
+                  <img src={getImgSrc(project.img)} alt={project.title} className="project-img" decoding="async" />
+                  <span className="fp-index">{String(i + 1).padStart(2, '0')}</span>
                   <div className="project-overlay">
                     <span className="project-btn">ดูรายละเอียด</span>
                   </div>
                 </div>
                 <div className="project-info">
-                  <span style={{ fontSize: '0.75rem', background: project.category === 'interior' ? '#e8f5e9' : project.category === 'exterior' ? '#e3f2fd' : '#fce4ec', color: '#555', padding: '0.15rem 0.5rem', borderRadius: 10, marginBottom: '0.3rem', display: 'inline-block' }}>
-                    {CATEGORY_LABELS[project.category] || 'รีโนเวท'}
-                  </span>
+                  <span className="project-cat">{CATEGORY_LABELS[project.category] || 'รีโนเวท'}</span>
                   <h3 className="project-title">{project.title}</h3>
                 </div>
-              </div>
+              </article>
             ))}
+            <div className="fp-end">
+              <p className="eyebrow">Let's build</p>
+              <a href="#contact" className="btn btn-solid">ปรึกษาสถาปนิกฟรี</a>
+            </div>
           </div>
         )}
       </div>

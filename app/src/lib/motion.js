@@ -63,6 +63,60 @@ export function useParallax(speed = 0.25) {
   return ref;
 }
 
+/**
+ * Horizontal pin: turns a tall section into a "scroll-jack" where vertical
+ * scroll drives horizontal movement of an inner track. Desktop only
+ * (>=992px) and disabled under reduced-motion — otherwise the section is a
+ * normal-height vertical block (CSS handles the grid fallback).
+ * Pass deps (e.g. [filteredCount]) so it recomputes when content changes.
+ */
+export function useHorizontalPin(deps = []) {
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
+  useEffect(() => {
+    const section = sectionRef.current;
+    const track = trackRef.current;
+    if (!section || !track) return;
+
+    const active = () =>
+      window.matchMedia('(min-width: 992px)').matches && !prefersReduced();
+
+    let raf = 0;
+    const render = () => {
+      raf = 0;
+      if (!active()) return;
+      const rect = section.getBoundingClientRect();
+      const total = section.offsetHeight - window.innerHeight;
+      const progress = total > 0 ? Math.max(0, Math.min(1, -rect.top / total)) : 0;
+      const dist = Math.max(0, track.scrollWidth - window.innerWidth);
+      track.style.transform = `translate3d(${(-progress * dist).toFixed(1)}px,0,0)`;
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(render); };
+    const layout = () => {
+      if (!active()) { section.style.height = ''; track.style.transform = ''; return; }
+      const dist = Math.max(0, track.scrollWidth - window.innerWidth);
+      section.style.height = `${dist + window.innerHeight}px`;
+      render();
+    };
+
+    layout();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', layout);
+    // images change track width as they load
+    track.querySelectorAll('img').forEach((img) => {
+      if (!img.complete) img.addEventListener('load', layout, { once: true });
+    });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', layout);
+      if (raf) cancelAnimationFrame(raf);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
+
+  return { sectionRef, trackRef };
+}
+
 /** Count-up: animates an element's text from 0 → target when scrolled into view. */
 export function useCountUp(target, { duration = 1600, suffix = '' } = {}) {
   const ref = useRef(null);

@@ -6,8 +6,8 @@
   --surface:   #ffffff;   /* cards */
   --ink:       #1a1714;   /* primary text / headings */
   --ink-soft:  #6b6259;   /* muted body */
-  --line:      rgba(26, 23, 20, .12);  /* hairline */
-  --gold:      #a87c32;   /* premium gold (single source of truth) */
+  --line:      rgba(26, 23, 20, .05);  /* softened hairline */
+  --gold:      #a87c32;   /* premium gold */
   --gold-hover:#8f6829;
   --gold-soft: #f3ead8;   /* gold tint backgrounds */
   --ink-deep:  #16130f;   /* dark contrast sections (footer) */
@@ -39,7 +39,7 @@ html, body {
   background-color: var(--bg);
   color: var(--ink);
   line-height: 1.65;
-  overflow-x: hidden;
+  overflow-x: clip; /* clip (not hidden) so position:sticky still works for the pinned showcase */
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -143,7 +143,7 @@ img { max-width: 100%; display: block; }
 .btn-ghost:hover { color: var(--gold-hover); }
 
 /* ───────────────────── Layout sections ───────────────────── */
-.section { padding: clamp(4.5rem, 9vw, 8rem) 0; }
+.section { padding: clamp(6rem, 11vw, 10rem) 0; }
 
 .bg-light { background-color: var(--bg); color: var(--ink); }
 .bg-alt   { background-color: var(--bg-alt); color: var(--ink); }

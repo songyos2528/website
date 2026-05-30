@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BS Build — Modern Luxury Concept (Demo)</title>
+
+<!-- Fonts: Fraunces (display serif) + IBM Plex Sans Thai (body, Thai+Latin) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper:    '#F6F4EF',   /* off-white */
+          graphite: '#1C1B18',   /* deep charcoal */
+          ink:      '#2A2824',
+          gold:     '#B08D57',   /* warm champagne bronze */
+          goldsoft: '#EFE6D6',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'IBM Plex Sans Thai', 'serif'],
+          body: ['IBM Plex Sans Thai', 'system-ui', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { background:#F6F4EF; color:#1C1B18; font-family:'IBM Plex Sans Thai',sans-serif; }
+  .font-display { font-family:'Fraunces','IBM Plex Sans Thai',serif; }
+
+  /* ── Scroll reveal ── */
+  .reveal { opacity:0; transform: translateY(34px); transition: opacity .9s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1); }
+  .reveal.in { opacity:1; transform:none; }
+
+  /* ── Animated underline link ── */
+  .ulink { position:relative; }
+  .ulink::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:1.5px; background:#B08D57; transition:width .35s cubic-bezier(.22,.61,.36,1); }
+  .ulink:hover::after { width:100%; }
+
+  /* ── Before / After slider ── */
+  .ba { position:relative; overflow:hidden; border-radius:14px; cursor:ew-resize; user-select:none; touch-action:none; }
+  .ba img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; pointer-events:none; }
+  .ba-before { position:absolute; inset:0; clip-path: inset(0 calc(100% - var(--pos,50%)) 0 0); }
+  .ba-tag { position:absolute; bottom:1rem; padding:.3rem .8rem; font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; border-radius:999px; backdrop-filter:blur(6px); color:#fff; }
+  .ba-line { position:absolute; top:0; bottom:0; left:var(--pos,50%); width:2px; background:#fff; transform:translateX(-50%); box-shadow:0 0 14px rgba(0,0,0,.35); pointer-events:none; }
+  .ba-handle { position:absolute; top:50%; left:var(--pos,50%); transform:translate(-50%,-50%); width:54px; height:54px; border-radius:50%; background:#fff; color:#B08D57; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 26px rgba(0,0,0,.28); pointer-events:none; }
+
+  /* ── Horizontal showcase ── */
+  .h-track { display:flex; gap:1.5rem; will-change:transform; }
+  .h-year { font-family:'Fraunces',serif; font-weight:600; line-height:1; color:transparent; -webkit-text-stroke:1.5px rgba(28,27,24,.18); font-size:clamp(5rem,14vw,12rem); }
+
+  /* Hide scrollbar on mobile fallback track */
+  .noscroll::-webkit-scrollbar{ display:none; }
+</style>
+</head>
+
+<body class="font-body antialiased">
+
+<!-- ░░░ NAV ░░░ -->
+<header class="fixed top-0 inset-x-0 z-50 transition-all duration-500" id="nav">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+    <a href="#" class="leading-none">
+      <span class="font-display text-2xl font-semibold tracking-tight" id="logo">BS&nbsp;Build</span>
+      <span class="block text-[10px] tracking-[0.3em] uppercase text-gold mt-1">Renovation &amp; Extension</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-9 text-sm font-medium" id="navlinks">
+      <a class="ulink" href="#services">บริการ</a>
+      <a class="ulink" href="#showcase">ผลงาน</a>
+      <a class="ulink" href="#process">ขั้นตอน</a>
+      <a class="ulink" href="#estimate">ประเมินงบ</a>
+    </nav>
+    <a href="#contact" class="hidden md:inline-flex items-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-white hover:bg-graphite transition-colors duration-300">ปรึกษาสถาปนิกฟรี</a>
+  </div>
+</header>
+
+<!-- ░░░ 1. HERO — Before/After slider ░░░ -->
+<section class="pt-28 pb-16 lg:pt-36 lg:pb-24">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10 items-center">
+    <div class="lg:col-span-5 reveal">
+      <p class="text-xs tracking-[0.3em] uppercase text-gold mb-5">Sophisticated Engineering</p>
+      <h1 class="font-display text-5xl lg:text-6xl font-semibold leading-[1.05] tracking-tight">
+        โครงสร้างที่แข็งแกร่ง<br>ในดีไซน์ที่<span class="italic text-gold">ประณีต</span>
+      </h1>
+      <p class="mt-6 text-ink/70 text-lg leading-relaxed max-w-md">
+        ต่อเติมและรีโนเวทบ้านครบวงจร โดยทีมวิศวกรและสถาปนิก ประสบการณ์กว่า 30 ปี โปร่งใสทุกขั้นตอน
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="#contact" class="rounded-full bg-graphite text-white px-7 py-3.5 text-sm font-semibold hover:bg-gold transition-colors duration-300">ปรึกษาสถาปนิกฟรี</a>
+        <a href="#showcase" class="rounded-full border border-graphite/25 px-7 py-3.5 text-sm font-semibold hover:border-gold hover:text-gold transition-colors duration-300">ดูผลงาน</a>
+      </div>
+      <p class="mt-6 text-xs text-ink/50">↔ ลากเส้นกลางภาพ เพื่อดูก่อน–หลังต่อเติม</p>
+    </div>
+
+    <div class="lg:col-span-7 reveal">
+      <div class="ba aspect-[4/3] shadow-[0_40px_80px_rgba(28,27,24,0.12)]" id="ba" style="--pos:50%">
+        <!-- AFTER (full) -->
+        <img src="https://picsum.photos/id/1076/1400/1050" alt="หลังต่อเติม">
+        <span class="ba-tag right-4 bg-black/45">After</span>
+        <!-- BEFORE (clipped) -->
+        <div class="ba-before">
+          <img src="https://picsum.photos/id/1029/1400/1050" alt="ก่อนต่อเติม" style="filter:grayscale(.4) brightness(.9)">
+          <span class="ba-tag left-4 bg-black/55">Before</span>
+        </div>
+        <div class="ba-line"></div>
+        <div class="ba-handle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 3 12 9 6" transform="translate(12 0)"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ 2. CREDIBILITY — count-up numbers ░░░ -->
+<section class="border-y border-graphite/10 bg-paper">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
+    <div class="reveal"><div class="font-display text-5xl font-semibold" data-count="30" data-suffix="+"></div><p class="mt-2 text-xs uppercase tracking-widest text-ink/55">ปีประสบการณ์</p></div>
+    <div class="reveal"><div class="font-display text-5xl font-semibold" data-count="450" data-suffix="+"></div><p class="mt-2 text-xs uppercase tracking-widest text-ink/55">โครงการสำเร็จ</p></div>
+    <div class="reveal"><div class="font-display text-5xl font-semibold" data-count="10" data-suffix=" ปี"></div><p class="mt-2 text-xs uppercase tracking-widest text-ink/55">รับประกันโครงสร้าง</p></div>
+    <div class="reveal"><div class="font-display text-5xl font-semibold" data-count="98" data-suffix="%"></div><p class="mt-2 text-xs uppercase tracking-widest text-ink/55">ลูกค้าพึงพอใจ</p></div>
+  </div>
+</section>
+
+<!-- ░░░ 3. SERVICES — blueprint fade-in ░░░ -->
+<section id="services" class="max-w-7xl mx-auto px-6 lg:px-10 py-24">
+  <div class="max-w-xl reveal">
+    <p class="text-xs tracking-[0.3em] uppercase text-gold mb-4">Core Services</p>
+    <h2 class="font-display text-4xl lg:text-5xl font-semibold tracking-tight">บริการต่อเติมครบวงจร</h2>
+  </div>
+  <div class="mt-14 grid md:grid-cols-3 gap-6">
+    <article class="blueprint group reveal" data-img="https://picsum.photos/id/164/800/600">
+      <div class="bp-stage"></div>
+      <h3 class="font-display text-2xl mt-5">Kitchen Extension</h3>
+      <p class="text-ink/65 mt-2 text-sm leading-relaxed">ต่อเติมครัวพร้อมระบบระบายอากาศและงานระบบครบ</p>
+    </article>
+    <article class="blueprint group reveal" data-img="https://picsum.photos/id/1067/800/600">
+      <div class="bp-stage"></div>
+      <h3 class="font-display text-2xl mt-5">Glass House</h3>
+      <p class="text-ink/65 mt-2 text-sm leading-relaxed">โรงเรือนกระจกโครงสร้างเหล็ก ดีไซน์โปร่งรับแสงธรรมชาติ</p>
+    </article>
+    <article class="blueprint group reveal" data-img="https://picsum.photos/id/1031/800/600">
+      <div class="bp-stage"></div>
+      <h3 class="font-display text-2xl mt-5">Garage &amp; Carport</h3>
+      <p class="text-ink/65 mt-2 text-sm leading-relaxed">โรงจอดรถโครงสร้างแข็งแรง พร้อมงานหลังคาและพื้น</p>
+    </article>
+  </div>
+</section>
+
+<!-- ░░░ 4. HORIZONTAL SHOWCASE ░░░ -->
+<section id="showcase" class="relative bg-graphite text-paper" style="height: 320vh;">
+  <div class="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
+    <div class="px-6 lg:px-10 max-w-7xl mx-auto w-full mb-8 flex items-end justify-between">
+      <div>
+        <p class="text-xs tracking-[0.3em] uppercase text-gold mb-3">Selected Works</p>
+        <h2 class="font-display text-4xl lg:text-5xl font-semibold">ผลงานที่ผ่านมา</h2>
+      </div>
+      <p class="hidden md:block text-paper/40 text-sm">เลื่อนลง → ภาพเลื่อนแนวนอน</p>
+    </div>
+    <div class="h-track px-6 lg:px-10" id="htrack">
+      <!-- panels -->
+      <figure class="relative shrink-0 w-[78vw] md:w-[46vw] aspect-[16/10] rounded-2xl overflow-hidden">
+        <img src="https://picsum.photos/id/1040/1200/750" class="w-full h-full object-cover" alt="">
+        <span class="h-year absolute -bottom-3 left-4 opacity-90" style="-webkit-text-stroke-color:rgba(255,255,255,.25)">2021</span>
+        <figcaption class="absolute top-5 left-5 font-display text-2xl">Hillside Villa Extension</figcaption>
+      </figure>
+      <figure class="relative shrink-0 w-[78vw] md:w-[46vw] aspect-[16/10] rounded-2xl overflow-hidden">
+        <img src="https://picsum.photos/id/1048/1200/750" class="w-full h-full object-cover" alt="">
+        <span class="h-year absolute -bottom-3 left-4 opacity-90" style="-webkit-text-stroke-color:rgba(255,255,255,.25)">2022</span>
+        <figcaption class="absolute top-5 left-5 font-display text-2xl">Riverside Glass House</figcaption>
+      </figure>
+      <figure class="relative shrink-0 w-[78vw] md:w-[46vw] aspect-[16/10] rounded-2xl overflow-hidden">
+        <img src="https://picsum.photos/id/1062/1200/750" class="w-full h-full object-cover" alt="">
+        <span class="h-year absolute -bottom-3 left-4 opacity-90" style="-webkit-text-stroke-color:rgba(255,255,255,.25)">2023</span>
+        <figcaption class="absolute top-5 left-5 font-display text-2xl">Modern Kitchen Loft</figcaption>
+      </figure>
+      <figure class="relative shrink-0 w-[78vw] md:w-[46vw] aspect-[16/10] rounded-2xl overflow-hidden">
+        <img src="https://picsum.photos/id/1070/1200/750" class="w-full h-full object-cover" alt="">
+        <span class="h-year absolute -bottom-3 left-4 opacity-90" style="-webkit-text-stroke-color:rgba(255,255,255,.25)">2024</span>
+        <figcaption class="absolute top-5 left-5 font-display text-2xl">Penthouse Renovation</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ 5. PROCESS ░░░ -->
+<section id="process" class="max-w-7xl mx-auto px-6 lg:px-10 py-24">
+  <div class="max-w-xl reveal">
+    <p class="text-xs tracking-[0.3em] uppercase text-gold mb-4">Transparent Process</p>
+    <h2 class="font-display text-4xl lg:text-5xl font-semibold tracking-tight">ทำงานโปร่งใส 4 ขั้นตอน</h2>
+  </div>
+  <ol class="mt-14 grid md:grid-cols-4 gap-8">
+    <li class="reveal border-t-2 border-gold pt-5"><span class="font-display text-4xl text-gold">01</span><h3 class="font-display text-xl mt-3">ปรึกษา &amp; สำรวจ</h3><p class="text-ink/65 text-sm mt-2">ประเมินหน้างานและความต้องการฟรี</p></li>
+    <li class="reveal border-t-2 border-gold pt-5"><span class="font-display text-4xl text-gold">02</span><h3 class="font-display text-xl mt-3">ออกแบบ &amp; เสนอราคา</h3><p class="text-ink/65 text-sm mt-2">แบบ 3D + BOQ ราคาชัดเจน</p></li>
+    <li class="reveal border-t-2 border-gold pt-5"><span class="font-display text-4xl text-gold">03</span><h3 class="font-display text-xl mt-3">ก่อสร้าง</h3><p class="text-ink/65 text-sm mt-2">รายงานความคืบหน้าทุกสัปดาห์</p></li>
+    <li class="reveal border-t-2 border-gold pt-5"><span class="font-display text-4xl text-gold">04</span><h3 class="font-display text-xl mt-3">ส่งมอบ &amp; รับประกัน</h3><p class="text-ink/65 text-sm mt-2">รับประกันโครงสร้าง 10 ปี</p></li>
+  </ol>
+</section>
+
+<!-- ░░░ 6. CONTACT ░░░ -->
+<section id="contact" class="bg-graphite text-paper">
+  <div class="max-w-3xl mx-auto px-6 lg:px-10 py-24 reveal">
+    <p class="text-xs tracking-[0.3em] uppercase text-gold mb-4 text-center">Let's Build</p>
+    <h2 class="font-display text-4xl lg:text-5xl font-semibold text-center">เริ่มต้นโครงการของคุณ</h2>
+    <form class="mt-10 grid sm:grid-cols-2 gap-4" onsubmit="event.preventDefault(); this.reset(); alert('ขอบคุณครับ — เดโม');">
+      <input class="bg-white/5 border border-white/15 rounded-lg px-4 py-3.5 placeholder-paper/40 focus:border-gold focus:bg-white/10 outline-none transition" placeholder="ชื่อ-นามสกุล">
+      <input class="bg-white/5 border border-white/15 rounded-lg px-4 py-3.5 placeholder-paper/40 focus:border-gold focus:bg-white/10 outline-none transition" placeholder="เบอร์ / LINE">
+      <textarea rows="3" class="sm:col-span-2 bg-white/5 border border-white/15 rounded-lg px-4 py-3.5 placeholder-paper/40 focus:border-gold focus:bg-white/10 outline-none transition" placeholder="เล่ารายละเอียดงานที่ต้องการ..."></textarea>
+      <button class="sm:col-span-2 rounded-full bg-gold text-white font-semibold py-4 hover:bg-paper hover:text-graphite transition-colors duration-300">ส่งคำขอปรึกษาฟรี</button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-graphite text-paper/40 text-center text-xs py-8 border-t border-white/10">© 2026 BS Build — Modern Luxury Concept Demo</footer>
+
+<style>
+  /* Blueprint fade-in (service cards) */
+  .blueprint .bp-stage{
+    position:relative; aspect-ratio:4/3; border-radius:14px; overflow:hidden;
+    background:
+      linear-gradient(rgba(176,141,87,.18) 1px, transparent 1px) 0 0/26px 26px,
+      linear-gradient(90deg, rgba(176,141,87,.18) 1px, transparent 1px) 0 0/26px 26px,
+      #15140f;
+  }
+  .blueprint .bp-stage::after{
+    content:''; position:absolute; inset:0; border-radius:14px;
+    background-size:cover; background-position:center;
+    opacity:0; transform:scale(1.04); transition:opacity 1s ease, transform 1.4s ease;
+  }
+  .blueprint.in .bp-stage::after{ opacity:1; transform:scale(1); }
+</style>
+
+<script>
+  /* ── Nav: solid on scroll ── */
+  const nav = document.getElementById('nav');
+  const onScrollNav = () => {
+    if (window.scrollY > 40) { nav.classList.add('bg-paper/85','backdrop-blur','shadow-[0_1px_0_rgba(28,27,24,.08)]'); }
+    else { nav.classList.remove('bg-paper/85','backdrop-blur','shadow-[0_1px_0_rgba(28,27,24,.08)]'); }
+  };
+  onScrollNav(); window.addEventListener('scroll', onScrollNav, {passive:true});
+
+  /* ── Scroll reveal ── */
+  const io = new IntersectionObserver((es)=>es.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  }), {threshold:.18});
+  document.querySelectorAll('.reveal,.blueprint').forEach(el=>io.observe(el));
+
+  /* ── Blueprint: feed each card's photo into its ::after (fades in with .in) ── */
+  document.querySelectorAll('.blueprint').forEach(c=>{
+    c.querySelector('.bp-stage').style.setProperty('--bgimg', `url(${c.dataset.img})`);
+  });
+
+  /* ── Before / After slider ── */
+  (function(){
+    const ba = document.getElementById('ba');
+    let down=false;
+    const setPos = (clientX)=>{
+      const r = ba.getBoundingClientRect();
+      let p = ((clientX - r.left)/r.width)*100;
+      p = Math.max(3, Math.min(97, p));
+      ba.style.setProperty('--pos', p+'%');
+    };
+    ba.addEventListener('pointerdown', e=>{ down=true; ba.setPointerCapture(e.pointerId); setPos(e.clientX); });
+    ba.addEventListener('pointermove', e=>{ if(down) setPos(e.clientX); });
+    ba.addEventListener('pointerup',   ()=> down=false);
+    ba.addEventListener('pointercancel',()=> down=false);
+  })();
+
+  /* ── Count-up ── */
+  const cio = new IntersectionObserver((es)=>es.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const el = e.target, end = +el.dataset.count, suf = el.dataset.suffix||'', t0=performance.now(), dur=1500;
+    const tick=(now)=>{ const p=Math.min((now-t0)/dur,1); const v=Math.round(end*(1-Math.pow(1-p,3))); el.textContent=v+suf; if(p<1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick); cio.unobserve(el);
+  }), {threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+  /* ── Horizontal showcase: vertical scroll → translateX ── */
+  (function(){
+    const section = document.getElementById('showcase');
+    const track = document.getElementById('htrack');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { section.style.height='auto'; track.style.flexWrap='wrap'; return; }
+    const onScroll = ()=>{
+      const rect = section.getBoundingClientRect();
+      const total = section.offsetHeight - window.innerHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / total));
+      const distance = track.scrollWidth - window.innerWidth + 80;
+      track.style.transform = `translateX(${-progress*distance}px)`;
+    };
+    onScroll(); window.addEventListener('scroll', onScroll, {passive:true}); window.addEventListener('resize', onScroll);
+  })();
+</script>
+
+<!-- Blueprint ::after needs the image var; inject a tiny stylesheet that reads --bgimg -->
+<style> .blueprint .bp-stage::after{ background-image: var(--bgimg); } </style>
+
+</body>
+</html>
